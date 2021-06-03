@@ -1,20 +1,25 @@
 <template>
   <Header />
   <div class="top-space"></div>
+  <Card />
   <router-view/>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
+import Card from './components/Card.vue';
 
 export default {
   components: {
-    Header
+    Header,
+    Card
   }
 }
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
