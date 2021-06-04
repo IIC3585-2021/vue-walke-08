@@ -100,4 +100,6 @@
             }
         }
     }
+/* Código extraído y levemente modificado de: https://github.com/LaravelDaily/Laravel-Vue-Sidebar-Filters/blob/master/resources/js/components/Front.vue
+Además de la explicación del video en Youtube de: https://www.youtube.com/watch?v=ZZkROqT83t8 */
 </script>
