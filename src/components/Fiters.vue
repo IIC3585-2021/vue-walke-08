@@ -6,7 +6,7 @@
 
                 <h3 class="mt-2">Ingredientes</h3>
                 <div class="form-check" v-for="(ingredient, index) in ingredients">
-                    <input class="form-check-input" type="checkbox" :value="index" :id="'ingredient'+index" v-model="selected.ingredients">
+                    <input class="form-check-input" type="checkbox" :value="ingredient" :id="'ingredient'+index" v-model="selected.ingredients">
                     <label class="form-check-label" :for="'ingredient' + index">
                         {{ ingredient.name }} 
                     </label>
@@ -14,7 +14,7 @@
 
                 <h3 class="mt-2">Calorias</h3>
                 <div class="form-check" v-for="(caloria, index) in calorias">
-                    <input class="form-check-input" type="checkbox" :value="caloria.id" :id="'caloria'+index" v-model="selected.calorias">
+                    <input class="form-check-input" type="checkbox" :value="caloria" :id="'caloria'+index" v-model="selected.calorias">
                     <label class="form-check-label" :for="'caloria' + index">
                         {{ caloria.name }} 
                     </label>
@@ -22,7 +22,7 @@
 
                 <h3 class="mt-2">Nutrientes</h3>
                 <div class="form-check" v-for="(nutriente, index) in nutrientes">
-                    <input class="form-check-input" type="checkbox" :value="nutriente.id" :id="'nutriente'+index" v-model="selected.nutrientes">
+                    <input class="form-check-input" type="checkbox" :value="nutriente" :id="'nutriente'+index" v-model="selected.nutrientes">
                     <label class="form-check-label" :for="'nutriente' + index">
                         {{ nutriente.name }} 
                     </label>
@@ -30,15 +30,16 @@
             </div>
         </div>
     </div>
+    <button @click="youState">Ver estado</button>
 </template>
 
 <script>
     export default {
         data: function () {
             return {
-                ingredients: [],
-                nutrientes: [],
-                calorias: [],
+                ingredients: [{id: 0, name: "pollo"}, {id: 1, name: "carne"}, {id: 2, name:"pescado"}],
+                nutrientes: [{id: 0, name:"calcio"}, {id: 2, name:"potasio"}, {id: 3, name:"vitamina k"}],
+                calorias: [{id: 0, name:"14000"}, {id: 1, name:"1203901293912"}, {id: 2, name:"3499943"}],
                 loading: true,
                 selected: {
                     ingredients: [],
@@ -47,56 +48,20 @@
                 }
             }
         },
-        mounted() {
-            this.loadIngredients();
-            this.loadNutrientes();
-            this.loadCalorias();
-        },
         watch: {
             selected: {
                 handler: function () {
-                    this.loadIngredients();
-                    this.loadNutrientes();
-                    this.loadCalorias();
+                    console.log("ingredients: ", this.selected.ingredients);
+                    console.log("nutrientes: ", this.selected.nutrientes);
+                    console.log("calorias: ", this.selected.calorias)
+                    this.$store.dispatch("saveFilters", this.selected)
                 },
                 deep: true
             }
         },
         methods: {
-            loadIngredients: function () {
-                axios.get('/api/categories', {
-                        params: _.omit(this.selected, 'categories')
-                    })
-                    .then((response) => {
-                        this.categories = response.data.data;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            },
-            loadNutrientes: function () {
-                axios.get('/api/manufacturers', {
-                        params: _.omit(this.selected, 'manufacturers')
-                    })
-                    .then((response) => {
-                        this.manufacturers = response.data.data;
-                        this.loading = false;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
-            },
-            loadCalorias: function () {
-                axios.get('/api/prices', {
-                        params: _.omit(this.selected, 'prices')
-                    })
-                    .then((response) => {
-                        this.prices = response.data;
-                        this.loading = false;
-                    })
-                    .catch(function (error) {
-                        console.log(error);
-                    });
+            youState(){
+                console.log(this.$store.state.filters)
             }
         }
     }

@@ -40,6 +40,10 @@ export default {
     box-shadow: 4px 2px 3px 2px rgba(0, 0, 0, 0.3);
   }
 
+  .card:hover {
+    border: 2px solid rgba(29, 61, 201, 1);
+  }
+
   .card img {
     height: 230px;
     width: 100%;

@@ -2,6 +2,7 @@
   <Header />
   <div class="top-space"></div>
   <Card />
+  <Fiters />
   <router-view/>
 </template>
 
