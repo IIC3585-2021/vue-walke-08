@@ -3,9 +3,10 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     filters: {
-      ingredients: [],
-      nutrients: [],
-      calorias: [],
+      diets: [],
+      mealType: [],
+      min: 0,
+      max: 0,
     },
     favorites: []
   },
