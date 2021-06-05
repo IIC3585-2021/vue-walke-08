@@ -23,6 +23,7 @@ export default {
   methods: {
     searchHandler() {
       this.isSearching = true
+      console.log(process.env.VUE_APP_VARIABLE)
     }
   }
 }
