@@ -2,17 +2,20 @@
   <Header />
   <div class="top-space"></div>
   <Card />
+  <Fiters />
   <router-view/>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
 import Card from './components/Card.vue';
+import Fiters from './components/Fiters.vue'
 
 export default {
   components: {
     Header,
-    Card
+    Card,
+    Fiters
   }
 }
 </script>
