@@ -7,25 +7,23 @@
                 <h3 class="mt-2">Tipo de dieta</h3>
                 <div class="form-check" v-for="(diet, index) in diets">
                     <label class="container2" :for="'diet' + index">
-                    <input class="form-check-input" type="radio" :value="diet" :id="'diet'+index" v-model="selected.diets">
+                    <input class="form-check-input" type="checkbox" :value="diet" :id="'diet'+index" v-model="selected.diets">
                         {{ diet.name }} 
                     <span class="checkmark"></span>
                     </label>
                 </div>
 
-                <h3 class="mt-2">Calorias</h3>
+                <h3 class="mt-2">Calorías</h3>
                 <div class="form-check">
-                    <!-- <input class="form-check-input" type="checkbox" :value="caloria" :id="'caloria'+index" v-model="selected.calorias">
-                    <label class="form-check-label" :for="'caloria' + index">
-                        {{ caloria.name }} 
-                    </label> -->
-                    <span>Mínimo
-                       <input type="range" min="0" max="1000" step="50" v-model="selected.min">
+                    <div>Mínimo
+                       <input type="range" min="0" max="5000" step="50" v-model="selected.min">
                        <span v-text="minimo"></span>
+                    </div>
+                    <div>
                        Máximo
-                       <input type="range" min="0" max="2000" step="50" v-model="selected.max"> 
+                       <input type="range" min="0" max="5000" step="50" v-model="selected.max"> 
                        <span v-text="maximo"></span>
-                    </span>  
+                    </div>  
                 </div>
 
                 <h3 class="mt-2">Tipo de comida</h3>
