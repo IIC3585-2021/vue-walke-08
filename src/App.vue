@@ -1,8 +1,6 @@
 <template>
   <Header />
   <div class="top-space"></div>
-  <Card />
-  <Fiters />
   <router-view/>
 </template>
 
@@ -38,5 +36,7 @@ export default {
 body {
   padding: 0;
   margin: 0;
+  background-color: #2e8a0b;
+  background-image: url("https://www.transparenttextures.com/patterns/food.png");
 }
 </style>

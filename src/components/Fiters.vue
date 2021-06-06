@@ -36,7 +36,6 @@
                 </div>
             </div>
         </div>
-    <button @click="youState">Ver estado</button>
     </div>
 </template>
 
@@ -51,8 +50,8 @@
                 selected: {
                     diets: [],
                     mealType: [],
-                    min: 100,
-                    max: 500,
+                    min: 0,
+                    max: 5000,
                 },
             }
         },

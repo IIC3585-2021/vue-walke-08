@@ -2,8 +2,8 @@
   <div class="card" @click="selectMeal">
     <img :src="image" :alt="meal">
     <div class="meal-name">
-      <span>{{ meal.toUpperCase() }}</span>
-      <span>45m</span>
+      <span>{{ name.toUpperCase() }}</span>
+      <span v-if="time > 0">{{time}}m</span>
     </div>
   </div>
 </template>
@@ -12,10 +12,14 @@
 
 
 export default {
+  props: [
+    "image",
+    "time",
+    "name",
+    "meal",
+  ],
   data() {
     return {
-      image: "https://europe.wordcamp.org/2015/files/2015/06/Good_Food_Display_-_NCI_Visuals_Online.jpg",
-      meal: 'comida'
     }
   },
   methods: {
