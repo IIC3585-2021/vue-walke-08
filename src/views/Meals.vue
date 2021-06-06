@@ -16,9 +16,17 @@
           <input type="text" placeholder="Search.." name="search" v-model="input">
           <button type="submit"><i class="fa fa-search"></i></button>
         </form>
-      </div>
-        <div v-for="meal in meals" :key="meal.recipe.label" class="tarjetas">
-          <Card :image="meal.recipe.image" :name="meal.recipe.label" :time="meal.recipe.totalTime" :meal="meal.recipe"/>
+        </div>
+        <div v-if="loading">
+          <Loader/>
+        </div>
+        <div class="centrando">
+          <div v-for="meal in filterMeals" :key="meal.recipe.label" class="tarjetas">
+            <Card :image="meal.recipe.image" :name="meal.recipe.label" :time="meal.recipe.totalTime" :meal="meal.recipe"/>
+          </div>
+        </div>
+        <div v-if="meals.length === 0 && !loading">
+          404 Not Found
         </div>
       </div> 
     </div>
@@ -28,6 +36,7 @@
 <script>
 import Card from '../components/Card.vue'
 import Fiters from '../components/Fiters.vue'
+import Loader from '../components/Loader.vue'
 export default {
   name: 'Home',
   data() {
@@ -36,6 +45,44 @@ export default {
       input: '',
       loading: false,
       meals: [],
+    }
+  },
+  mounted(){
+    if (this.$store.state.meals.length > 0){
+      this.meals = this.$store.state.meals
+      this.isSearching = true;
+    }
+  },
+  computed: {
+    filterMeals(){
+      console.log("acaaaaaaaaaa:",this.$store.state.filters)
+      let filterMeals = [...this.meals];
+      const {min,max,diets, mealType} = this.$store.state.filters;
+      if (diets.length > 0){
+        filterMeals = this.meals.filter(meal => {
+          for (const diet of diets){
+            console.log("sdfasdf:", meal.recipe.dietLabels[0])
+            console.log("name: ", diet.name)
+            if (meal.recipe.dietLabels[0] && diet.name === meal.recipe.dietLabels[0].replace("-","_").toLowerCase()){
+              return true;
+            }
+          }
+        })
+      }
+      if (mealType.length > 0){
+        filterMeals = filterMeals.filter(meal => {
+          for (const type of mealType){
+            
+            if (meal.recipe.mealType && meal.recipe.mealType[0].toLowerCase().includes(type.name.toLowerCase())){
+              console.log("type: ", type)
+              console.log("fdsafa: ", meal.recipe.mealType[0])
+              return true;
+            }
+          }
+        })
+      }
+      filterMeals = filterMeals.filter(meal => meal.recipe.calories >= min && meal.recipe.calories <= max);
+      return filterMeals
     }
   },
   methods: {
@@ -51,17 +98,23 @@ export default {
       .then(data => {
         this.loading = false;
         this.meals = data.hits;
+        this.$store.dispatch("saveMeals", this.meals);
       })
     }
   },
   components: {
     Card,
     Fiters,
+    Loader,
   }
 }
 </script>
 
 <style>
+
+.centrando{
+  text-align: center;
+}
 
 .tarjetas {
   display: inline-block;
@@ -77,9 +130,10 @@ export default {
 
 .main-container {
   display: flex;
-  width: 90%;
+  max-width: 80%;
+  width: 80%;
   margin: 0 auto;
-  background-color: #eee;
+  background-color: rgb(224, 83, 83);
   min-height: 100vh;
 }
 

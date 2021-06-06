@@ -9,8 +9,7 @@
 <style>
 .navbar {
   overflow: hidden;
-  background-color: rgb(29, 61, 201);
-  position: fixed; /* Set the navbar to fixed position */
+  background-color: #191D8A;
   top: 0; /* Position the navbar at the top of the page */
   width: 100%; /* Full width */
   height: 50px;

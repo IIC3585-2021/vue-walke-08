@@ -25,6 +25,8 @@ export default {
   methods: {
     selectMeal() {
       console.log('seleccionada!!')
+      console.log("this.props: ", this.$props)
+      this.$router.push({name: 'MealDetail', params: {id: this.$props.name.replace(/ /g,"")}})
     }
   }
 }
@@ -45,7 +47,8 @@ export default {
   }
 
   .card:hover {
-    border: 2px solid rgba(29, 61, 201, 1);
+    border: 2px solid #191D8A;
+    cursor: pointer;
   }
 
   .card img {

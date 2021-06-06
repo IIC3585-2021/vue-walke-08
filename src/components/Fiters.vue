@@ -2,9 +2,9 @@
     <div class="container" :class="{'loading': loading}">
         <div class="row">
             <div class="col-lg-3 mb-4">
-                <h1 class="mt-4">Filtros</h1>
+                <h1 class="mt-4">Filters</h1>
 
-                <h3 class="mt-2">Tipo de dieta</h3>
+                <h3 class="mt-2">Diet Type</h3>
                 <div class="form-check" v-for="(diet, index) in diets">
                     <label class="container2" :for="'diet' + index">
                     <input class="form-check-input" type="checkbox" :value="diet" :id="'diet'+index" v-model="selected.diets">
@@ -13,23 +13,23 @@
                     </label>
                 </div>
 
-                <h3 class="mt-2">Calorías</h3>
+                <h3 class="mt-2">Calories</h3>
                 <div class="form-check">
-                    <div>Mínimo
+                    <div>Minimum
                        <input type="range" min="0" max="5000" step="50" v-model="selected.min">
                        <span v-text="minimo"></span>
                     </div>
                     <div>
-                       Máximo
+                       Maximum
                        <input type="range" min="0" max="5000" step="50" v-model="selected.max"> 
                        <span v-text="maximo"></span>
                     </div>  
                 </div>
 
-                <h3 class="mt-2">Tipo de comida</h3>
+                <h3 class="mt-2">Meal Type</h3>
                 <div class="form-check" v-for="(meal, index) in mealType">
                     <label class="container2" :for="'meal' + index">
-                    <input class="form-check-input" type="radio" :value="meal" :id="'meal'+index" v-model="selected.mealType">
+                    <input class="form-check-input" type="checkbox" :value="meal" :id="'meal'+index" v-model="selected.mealType">
                         {{ meal.name }} 
                     <span class="checkmark"></span>
                     </label>
@@ -55,13 +55,12 @@
                 },
             }
         },
+        mounted(){
+            this.$store.dispatch("saveFilters", this.selected)
+        },
         watch: {
             selected: {
                 handler: function () {
-                    console.log("ingredients: ", this.selected.diets);
-                    console.log("nutrientes: ", this.selected.mealType);
-                    console.log("mínimo de calorias: ", this.selected.min)
-                    console.log("máximo de calorias: ", this.selected.max)
                     this.$store.dispatch("saveFilters", this.selected)
                 },
                 deep: true
