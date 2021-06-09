@@ -24,8 +24,6 @@ export default {
   },
   methods: {
     selectMeal() {
-      console.log('seleccionada!!')
-      console.log("this.props: ", this.$props)
       this.$router.push({name: 'MealDetail', params: {id: this.$props.name.replace(/ /g,"")}})
     }
   }

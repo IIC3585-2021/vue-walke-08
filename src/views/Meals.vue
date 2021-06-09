@@ -6,14 +6,14 @@
     <div class="no-main-container">
       <div class="overlay-content" v-if="!isSearching">
         <form @submit="searchHandler">
-          <input type="text" placeholder="Search.." name="search" v-model="input">
+          <input type="text" placeholder="Search a recipe for your meal" name="search" v-model="input">
           <button type="submit"><i class="fa fa-search"></i></button>
         </form>
       </div>
       <div v-else>
         <div class="overlay-content2">
         <form @submit="searchHandler">
-          <input type="text" placeholder="Search.." name="search" v-model="input">
+          <input type="text" placeholder="Search a recipe for your meal" name="search" v-model="input">
           <button type="submit"><i class="fa fa-search"></i></button>
         </form>
         </div>

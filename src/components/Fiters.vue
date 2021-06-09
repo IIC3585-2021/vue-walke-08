@@ -73,11 +73,9 @@
         },
         computed: {
             minimo: function(){
-                console.log("llegado a same");
                 return this.selected.min
             },
             maximo: function(){
-                console.log("llegamos al maximo");
                 return this.selected.max
             }
         }
